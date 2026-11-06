@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -52,14 +54,11 @@
 
     <section id="writing" class="writing-section wrap">
       <div class="section-heading"><div><div class="section-kicker">03 / LATEST</div><h2>최근 <em>글</em></h2></div><p>메인에는 최근·대표 글만 표시합니다.<br>전체 글은 각 카테고리에서 확인할 수 있습니다.</p></div>
+      {% assign recent_posts = site.pages | where: "item_type", "post" | sort: "post_date" | reverse %}
       <ol class="writing-list">
-        <li><a href="posts/pages-start.html"><span class="writing-index">01</span><span class="writing-text"><span class="writing-category">개발</span><strong>보안을 구현으로 연결한 2026 개발 기록</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="posts/ctf-notes.html"><span class="writing-index">02</span><span class="writing-text"><span class="writing-category">CTF/Wargame</span><strong>기초 학습에서 CTF 플랫폼 제작까지</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="posts/bug-bounty-scope.html"><span class="writing-index">03</span><span class="writing-text"><span class="writing-category">Bug Bounty</span><strong>CVE 재현과 LLM 보안 자동화로 다진 기반</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="posts/technical-writing.html"><span class="writing-index">04</span><span class="writing-text"><span class="writing-category">블로그/기술문서</span><strong>36개의 글을 포트폴리오로 다시 묶기</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="posts/paper-reading.html"><span class="writing-index">05</span><span class="writing-text"><span class="writing-category">논문/컨퍼런스</span><strong>보안 세미나 12강으로 넓힌 연구 지도</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="posts/preparation-log.html"><span class="writing-index">06</span><span class="writing-text"><span class="writing-category">공모전/자격증</span><strong>게임잼과 입문 CTF 제작에서 배운 것</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li>
-        <li><a href="posts/growth-plan.html"><span class="writing-index">07</span><span class="writing-text"><span class="writing-category">회고/계획</span><strong>넓게 시도한 다음, 깊이를 증명하는 방법</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li>
+        {% for post in recent_posts limit: 7 %}
+        <li><a href="{{ post.url | relative_url }}"><span class="writing-index">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span><span class="writing-text"><span class="writing-category">{{ post.category_label }}</span><strong>{{ post.title }}</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li>
+        {% endfor %}
       </ol>
     </section>
 
