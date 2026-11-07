@@ -1,50 +1,38 @@
 # dnrgus의 탐구 노트
 
-GitHub Pages에 게시하는 2026 활동 아카이브입니다. T-blog와 공개 GitHub 저장소를 근거로 개발, CTF/Wargame, Bug Bounty, 블로그/기술문서, 논문/컨퍼런스, 공모전/자격증 활동을 정리했습니다.
+GitHub Pages로 게시하는 활동 기록입니다. 개발, CTF/Wargame, Bug Bounty, 블로그/기술문서, 논문/컨퍼런스, 공모전/자격증 여섯 분야에서 **한 활동당 한 편의 글**을 작성합니다. 한 활동이 여러 분야에 해당할 때는 게시글을 복제하지 않고 각 카테고리에서 같은 글로 연결합니다.
 
-## 게시 방식
+## 게시 구조
 
-- 저장소: `dnrgus/dnrgus.github.io`
 - 주소: <https://dnrgus.github.io/>
-- 게시 소스: `main` 브랜치의 `/(root)`
-- 진입 파일: `index.html`
+- 진입점: `index.html`
+- 개별 글: `posts/<slug>/index.html` → `/posts/<slug>/`
+- 카테고리 목록: `categories/*.html`
+- 공통 스타일: `assets/site.css`
 
-GitHub Pages는 저장소의 정적 HTML/CSS/JavaScript를 웹사이트로 게시합니다. `main`에 변경 사항을 커밋하면 Pages 배포 작업이 실행됩니다. 배포 결과는 저장소의 **Actions**에서 확인합니다.
+기존 종합 글과 카테고리별 활동 보고서 주소는 새 목록으로 이동합니다. 이전 링크를 통해 들어온 독자가 글을 찾을 수 있도록 이동 페이지를 남겨 두었습니다.
 
-## 글 추가하기
+## 글 추가
 
-1. `posts/`에서 같은 카테고리의 기존 HTML 파일을 복사해 새 파일을 만듭니다.
-2. 파일 맨 위의 `title`, `post_category`, `category_label`, `post_date`를 새 글에 맞게 수정합니다.
-3. 본문의 소개 문장, `h1`, `h2`, `p` 내용을 교체합니다.
-4. 링크, 모바일 화면, 이미지 대체 텍스트를 확인한 뒤 커밋합니다.
+1. `posts/<slug>/index.html`을 만들고 `permalink: /posts/<slug>/`을 지정합니다.
+2. `item_type: post`, `post_category`, `post_categories`, `category_label`, `post_date`를 적습니다. `post_categories`에는 글을 보여줄 모든 카테고리를 넣습니다.
+3. 한 글에는 한 활동의 역할, 실제로 한 일, 확인한 결과와 근거 자료를 씁니다. 확인되지 않은 성과는 적지 않습니다.
+4. 본문과 제목을 다시 읽고 링크, 모바일 화면, 이미지 대체 텍스트를 확인합니다.
 
-같은 `post_category` 값을 가진 글은 해당 카테고리 페이지에 최신순으로 자동 표시됩니다. 기존 활동 보고서 6편의 내용은 `posts/activity-archive.html` 한 편에 모았습니다. 원래 주소는 유지하되 글 목록에서는 제외했습니다. 메인페이지에는 모든 카테고리를 합친 최신 글 7개만 자동 표시되므로, 글이 많아져도 메인페이지가 계속 길어지지 않습니다.
-
-~~~yaml
+```yaml
 ---
 item_type: post
-title: "새 글 제목"
+permalink: /posts/example/
+title: "활동 제목"
 post_category: development
+post_categories:
+  - development
+  - competitions-certifications
 category_label: 개발
-post_date: 2026-11-06 18:00:00 +0900
+post_date: 2026-11-07 10:00:00 +0900
 ---
-~~~
+```
 
-| 카테고리 | 전체 글 목록 파일 |
-|---|---|
-| 개발 | `categories/development.html` (기존 활동 글로 연결) |
-| CTF/Wargame | `categories/ctf-wargame.html` (기존 활동 글로 연결) |
-| Bug Bounty | `categories/bug-bounty.html` (기존 활동 글로 연결) |
-| 블로그/기술문서 | `categories/technical-writing.html` |
-| 논문/컨퍼런스 | `categories/papers-conferences.html` (기존 활동 글로 연결) |
-| 공모전/자격증 | `categories/competitions-certifications.html` (기존 활동 글로 연결) |
+`post_category`는 대표 분야이며 메인페이지의 최근 글에 표시됩니다. `post_categories`는 카테고리별 목록을 만드는 데 사용합니다. 메인페이지는 `item_type: post`인 글 중 최신 8편을 보여줍니다.
 
-## 구성
-
-- `index.html`: 소개, 여섯 활동 카테고리, 최근·대표 글 목록
-- `categories/`: `post_category` 값을 기준으로 생성되는 글 목록과 종합 활동 글의 분야별 바로가기
-- `posts/`: 여섯 분야를 모은 종합 활동 글 1편, 기존 글 6편의 보관본, 그 밖의 글과 성장 계획
-- `assets/site.css`: 반응형 디자인
-- `assets/brachio-*.webp`: 사용자 제공 이미지를 웹용으로 변환한 파일
-
-활동 내용은 2026년 11월 6일 공개 자료 기준입니다. 확인되지 않은 수상, 자격증 취득, 버그바운티 채택 실적은 성과로 적지 않았습니다. 보안 실습은 CTF/워게임 또는 명시적으로 승인된 범위에서만 진행합니다.
+글의 사실관계는 공개 T-blog와 GitHub 저장소를 기준으로 확인했습니다. 수상, 자격증 취득, 버그바운티 채택처럼 공개 자료로 확인되지 않는 결과는 성과로 적지 않았습니다.

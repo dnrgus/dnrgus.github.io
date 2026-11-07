@@ -1,0 +1,17 @@
+---
+item_type: post
+permalink: /posts/libexif-fuzzing/
+title: "libexif 퍼징 실습"
+post_category: bug-bounty
+post_categories:
+  - bug-bounty
+category_label: Bug Bounty
+post_date: 2026-11-07 10:13:00 +0900
+---
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Fuzzing-101의 libexif 0.6.14 실습에서 조작된 EXIF 입력을 이용해 메모리 오류를 살폈다."><meta name="theme-color" content="#f7f7f3"><title>libexif 퍼징 실습 | dnrgus의 탐구 노트</title><link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg"><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="../../index.html">dnrgus <span>/ notes</span></a><nav class="site-nav" aria-label="주 메뉴"><a href="../../index.html#categories">카테고리</a><a href="../../index.html#writing">최근 글</a><a href="https://github.com/dnrgus" target="_blank" rel="noopener noreferrer">GitHub</a></nav></div></header>
+<main id="main" class="story-page wrap"><a class="back-link" href="../../categories/bug-bounty.html">Bug Bounty 목록</a><article class="story"><header class="story-header"><p class="story-meta">Bug Bounty <span aria-hidden="true">/</span> 2026.11.07</p><h1>libexif 퍼징 실습</h1><p class="story-lead">Fuzzing-101의 libexif 0.6.14 실습에서 조작된 EXIF 입력을 이용해 메모리 오류를 살폈다.</p></header><div class="story-body"><section class="story-section"><h2>확인한 오류</h2><p>계측 빌드와 AFL++로 크래시 입력을 모으고 디버거로 힙 버퍼 오버플로와 범위 밖 읽기를 확인했다. 실습 대상은 CVE-2009-3895와 CVE-2012-2836이다.</p></section>
+<section class="story-section"><h2>남긴 기준</h2><p>크래시 입력, 발생 위치, 원인을 구분해 적었다. 알려진 취약점의 재현 기록이며 새로운 취약점 발견으로 표현하지 않았다.</p></section><section class="story-sources"><h2>근거 자료</h2><ul><li><a href="https://wook-hy.tistory.com/34" target="_blank" rel="noopener noreferrer">libexif 퍼징 원문</a></li></ul></section></div></article><nav class="story-back" aria-label="글 목록"><a href="../../categories/bug-bounty.html">Bug Bounty의 다른 글</a><a href="../../index.html">처음으로</a></nav></main>
+<footer class="site-footer"><div class="wrap footer-inner"><strong>dnrgus의 탐구 노트</strong><span>기록과 결과물의 연결</span></div></footer></body></html>
