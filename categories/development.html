@@ -18,8 +18,8 @@ category_key: development
     <a class="back-link" href="../index.html#categories">← 카테고리로</a>
     <header class="archive-header"><span class="article-category">CATEGORY 01 / 06</span><h1>개발</h1><p>게임의 플레이 흐름부터 안전한 파일 처리, CTF 운영과 보안 테스트 자동화까지 직접 구현한 과정을 모았습니다.</p></header>
     {% assign category_posts = site.pages | where: "post_category", page.category_key | sort: "post_date" | reverse %}
-    <div class="archive-summary"><strong>기존 활동 기록</strong><span>지금까지의 활동 글은 블로그/기술문서에 모았습니다.</span></div>
-    <ol class="writing-list archive-list"><li><a href="../posts/pages-start.html"><span class="writing-index">01</span><span class="writing-text"><span class="writing-category">개발</span><strong>보안을 구현으로 연결한 2026 개발 기록</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li></ol>
+    <div class="archive-summary"><strong>기존 활동 기록</strong><span>지금까지의 활동을 블로그/기술문서의 종합 글 한 편에 모았습니다.</span></div>
+    <ol class="writing-list archive-list"><li><a href="../posts/activity-archive.html#development"><span class="writing-index">01</span><span class="writing-text"><span class="writing-category">개발</span><strong>보안을 구현으로 연결한 2026 개발 기록</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li></ol>
     {% if category_posts.size > 0 %}
     <div class="archive-summary"><strong>새 개발 글 {{ category_posts | size }}개</strong></div>
     <ol class="writing-list archive-list">

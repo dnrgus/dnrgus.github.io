@@ -18,8 +18,8 @@ category_key: bug-bounty
     <a class="back-link" href="../index.html#categories">← 카테고리로</a>
     <header class="archive-header"><span class="article-category">CATEGORY 03 / 06</span><h1>Bug Bounty</h1><p>알려진 취약점의 구조와 재현 과정, 책임 있는 범위 안에서 수행하는 보안 테스트 기록을 모았습니다.</p></header>
     {% assign category_posts = site.pages | where: "post_category", page.category_key | sort: "post_date" | reverse %}
-    <div class="archive-summary"><strong>기존 활동 기록</strong><span>지금까지의 활동 글은 블로그/기술문서에 모았습니다.</span></div>
-    <ol class="writing-list archive-list"><li><a href="../posts/bug-bounty-scope.html"><span class="writing-index">01</span><span class="writing-text"><span class="writing-category">Bug Bounty</span><strong>CVE 재현과 LLM 보안 자동화로 다진 기반</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li></ol>
+    <div class="archive-summary"><strong>기존 활동 기록</strong><span>지금까지의 활동을 블로그/기술문서의 종합 글 한 편에 모았습니다.</span></div>
+    <ol class="writing-list archive-list"><li><a href="../posts/activity-archive.html#bug-bounty"><span class="writing-index">01</span><span class="writing-text"><span class="writing-category">Bug Bounty</span><strong>CVE 재현과 LLM 보안 자동화로 다진 기반</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li></ol>
     {% if category_posts.size > 0 %}
     <div class="archive-summary"><strong>새 Bug Bounty 글 {{ category_posts | size }}개</strong></div>
     <ol class="writing-list archive-list">
