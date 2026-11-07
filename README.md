@@ -18,7 +18,7 @@ GitHub Pages는 저장소의 정적 HTML/CSS/JavaScript를 웹사이트로 게�
 3. 본문의 소개 문장, `h1`, `h2`, `p` 내용을 교체합니다.
 4. 링크, 모바일 화면, 이미지 대체 텍스트를 확인한 뒤 커밋합니다.
 
-같은 `post_category` 값을 가진 글은 해당 카테고리 페이지에 최신순으로 자동 표시됩니다. 메인페이지에는 모든 카테고리를 합친 최신 글 7개만 자동 표시되므로, 글이 많아져도 메인페이지가 계속 길어지지 않습니다.
+같은 `post_category` 값을 가진 글은 해당 카테고리 페이지에 최신순으로 자동 표시됩니다. 기존 활동 보고서 6편은 `technical-writing` 카테고리에 모아 두고, `activity_label`로 원래 활동 주제를 표시합니다. 메인페이지에는 모든 카테고리를 합친 최신 글 7개만 자동 표시되므로, 글이 많아져도 메인페이지가 계속 길어지지 않습니다.
 
 ~~~yaml
 ---
@@ -32,12 +32,12 @@ post_date: 2026-11-06 18:00:00 +0900
 
 | 카테고리 | 전체 글 목록 파일 |
 |---|---|
-| 개발 | `categories/development.html` |
-| CTF/Wargame | `categories/ctf-wargame.html` |
-| Bug Bounty | `categories/bug-bounty.html` |
+| 개발 | `categories/development.html` (기존 활동 글로 연결) |
+| CTF/Wargame | `categories/ctf-wargame.html` (기존 활동 글로 연결) |
+| Bug Bounty | `categories/bug-bounty.html` (기존 활동 글로 연결) |
 | 블로그/기술문서 | `categories/technical-writing.html` |
-| 논문/컨퍼런스 | `categories/papers-conferences.html` |
-| 공모전/자격증 | `categories/competitions-certifications.html` |
+| 논문/컨퍼런스 | `categories/papers-conferences.html` (기존 활동 글로 연결) |
+| 공모전/자격증 | `categories/competitions-certifications.html` (기존 활동 글로 연결) |
 
 ## 구성
 

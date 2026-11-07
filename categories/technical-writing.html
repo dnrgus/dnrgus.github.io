@@ -16,12 +16,12 @@ category_key: technical-writing
   <header class="site-header"><div class="wrap header-inner"><a class="brand" href="../index.html" aria-label="dnrgus의 탐구 노트 홈"><span class="brand-mark" aria-hidden="true">B.</span><span>dnrgus<span class="brand-sub"> / field notes</span></span></a><nav aria-label="주 메뉴"><a href="../index.html#about">소개</a><a href="../index.html#categories">카테고리</a><a href="../index.html#writing">최근 글</a><a class="nav-github" href="https://github.com/dnrgus" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></div></header>
   <main id="main"><section class="archive-shell wrap">
     <a class="back-link" href="../index.html#categories">← 카테고리로</a>
-    <header class="archive-header"><span class="article-category">CATEGORY 04 / 06</span><h1>블로그/기술문서</h1><p>학습 노트, 실습 보고서, 프로젝트 README와 포트폴리오 운영에 관한 기록을 모았습니다.</p></header>
+    <header class="archive-header"><span class="article-category">CATEGORY 04 / 06</span><h1>블로그/기술문서</h1><p>각 카테고리에 흩어져 있던 2026년 활동 기록과 기술문서 작성 경험을 한곳에 모았습니다.</p></header>
     {% assign category_posts = site.pages | where: "post_category", page.category_key | sort: "post_date" | reverse %}
-    <div class="archive-summary"><strong>{{ category_posts | size }}개의 글</strong><span>새 블로그/기술문서 글은 이 목록에 자동으로 추가됩니다.</span></div>
+    <div class="archive-summary"><strong>{{ category_posts | size }}개의 글</strong><span>기존 활동의 주제는 글마다 함께 표시했습니다.</span></div>
     <ol class="writing-list archive-list">
       {% for post in category_posts %}
-      <li><a href="{{ post.url | relative_url }}"><span class="writing-index">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span><span class="writing-text"><span class="writing-category">{{ post.post_date | date: "%Y.%m" }}</span><strong>{{ post.title }}</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li>
+      <li><a href="{{ post.url | relative_url }}"><span class="writing-index">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span><span class="writing-text"><span class="writing-category">{{ post.activity_label | default: post.category_label }}</span><strong>{{ post.title }}</strong></span><span class="writing-arrow" aria-hidden="true">↗</span></a></li>
       {% endfor %}
     </ol>
   </section></main>
