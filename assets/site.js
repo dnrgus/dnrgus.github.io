@@ -121,20 +121,32 @@
     var K = 0.035
     var C = 0.2
     function wide() { return window.matchMedia('(min-width: 1200px)').matches }
+    // Place the table of contents, but never let its top edge rise above the article title.
+    function place(offset) {
+      var h = toc.offsetHeight
+      var base = window.innerHeight / 2 - h / 2
+      var title = document.querySelector('.story-header h1')
+      var floor = title ? title.getBoundingClientRect().top - base : -Infinity
+      var room = Math.max(0, (window.innerHeight - h) / 2 - 12)
+      var limit = Math.min(60, room)
+      var value = Math.max(-limit, Math.min(limit, offset))
+      value = Math.max(value, floor)
+      toc.style.transform = 'translateY(calc(-50% + ' + value.toFixed(2) + 'px))'
+    }
     function frame() {
       v += -K * y - C * v
       // Keep the table of contents inside the viewport even when it is long.
       var room = Math.max(0, (window.innerHeight - toc.offsetHeight) / 2 - 12)
       var limit = Math.min(60, room)
       y = Math.max(-limit, Math.min(limit, y + v))
-      if (wide()) toc.style.transform = 'translateY(calc(-50% + ' + y.toFixed(2) + 'px))'
+      if (wide()) place(y)
       if (Math.abs(y) > 0.05 || Math.abs(v) > 0.05) {
         window.requestAnimationFrame(frame)
       } else {
         running = false
         y = 0
         v = 0
-        toc.style.transform = ''
+        if (wide()) place(0)
       }
     }
     window.addEventListener('scroll', function () {
