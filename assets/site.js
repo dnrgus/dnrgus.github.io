@@ -123,7 +123,10 @@
     function wide() { return window.matchMedia('(min-width: 1200px)').matches }
     function frame() {
       v += -K * y - C * v
-      y = Math.max(-60, Math.min(60, y + v))
+      // Keep the table of contents inside the viewport even when it is long.
+      var room = Math.max(0, (window.innerHeight - toc.offsetHeight) / 2 - 12)
+      var limit = Math.min(60, room)
+      y = Math.max(-limit, Math.min(limit, y + v))
       if (wide()) toc.style.transform = 'translateY(calc(-50% + ' + y.toFixed(2) + 'px))'
       if (Math.abs(y) > 0.05 || Math.abs(v) > 0.05) {
         window.requestAnimationFrame(frame)
