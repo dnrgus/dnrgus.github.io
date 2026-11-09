@@ -1,0 +1,7 @@
+#!/bin/sh
+# Block commits that break the site frame, metadata, or links.
+# Enable once per clone: git config core.hooksPath .githooks
+node scripts/check-site.mjs || {
+  echo "commit blocked: site check failed. Fix the errors, or run 'node scripts/check-site.mjs --update' if a frame change is intended." >&2
+  exit 1
+}
