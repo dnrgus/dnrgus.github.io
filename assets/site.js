@@ -68,6 +68,7 @@
         var a = document.createElement('a')
         a.href = '#' + h.id
         a.textContent = h.textContent
+        li.style.setProperty('--i', i)
         li.appendChild(a)
         ol.appendChild(li)
       })
@@ -75,6 +76,20 @@
       toc.appendChild(ol)
       var header = article.querySelector('.story-header')
       if (header && header.nextSibling) header.parentNode.insertBefore(toc, header.nextSibling)
+      if ('IntersectionObserver' in window) {
+        var links = toc.querySelectorAll('a')
+        var linkFor = {}
+        Array.prototype.forEach.call(links, function (a) { linkFor[a.getAttribute('href').slice(1)] = a })
+        var spy = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return
+            Array.prototype.forEach.call(links, function (a) { a.classList.remove('is-current') })
+            var current = linkFor[entry.target.id]
+            if (current) current.classList.add('is-current')
+          })
+        }, { rootMargin: '-40% 0px -55% 0px' })
+        Array.prototype.forEach.call(heads, function (h) { spy.observe(h) })
+      }
     }
 
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
