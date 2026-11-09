@@ -118,12 +118,12 @@
     var v = 0
     var last = window.scrollY
     var running = false
-    var K = 0.14
-    var C = 0.16
+    var K = 0.035
+    var C = 0.2
     function wide() { return window.matchMedia('(min-width: 1200px)').matches }
     function frame() {
       v += -K * y - C * v
-      y = Math.max(-40, Math.min(40, y + v))
+      y = Math.max(-60, Math.min(60, y + v))
       if (wide()) toc.style.transform = 'translateY(calc(-50% + ' + y.toFixed(2) + 'px))'
       if (Math.abs(y) > 0.05 || Math.abs(v) > 0.05) {
         window.requestAnimationFrame(frame)
@@ -138,7 +138,7 @@
       if (!wide()) return
       var d = window.scrollY - last
       last = window.scrollY
-      v += Math.max(-30, Math.min(30, d)) * 0.25
+      v += Math.max(-40, Math.min(40, d)) * 0.18
       if (!running) {
         running = true
         window.requestAnimationFrame(frame)
