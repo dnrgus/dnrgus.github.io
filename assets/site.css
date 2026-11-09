@@ -110,7 +110,7 @@ img{display:block;max-width:100%}
 @media(prefers-reduced-motion:reduce){.toc li{animation:none}.toc a{transition:none}}
 .to-top{width:64px;height:64px;white-space:nowrap;line-height:1.2;padding:0}
 @media(max-width:760px){.to-top{width:56px;height:56px}}
-@media(min-width:1280px){.story:has(>.toc)>.toc{left:max(16px,calc(50% - 600px));width:190px}.story:has(>.toc)>.toc a{font-size:16px;padding:7px 0 7px 14px}.story:has(>.toc)>.toc .toc-title{font-size:14px}}
+@media(min-width:1280px){.story:has(>.toc)>.toc{left:max(16px,calc(50% - 650px));width:190px}.story:has(>.toc)>.toc a{font-size:16px;padding:7px 0 7px 14px}.story:has(>.toc)>.toc .toc-title{font-size:14px}}
 .js-motion .reveal.in{opacity:1;transform:none}
 .category-list>li,.writing-list>li{min-width:0}
 .category-list a{min-width:0;max-width:100%}
