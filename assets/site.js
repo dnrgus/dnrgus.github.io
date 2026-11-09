@@ -9,6 +9,29 @@
   if (list) initArchiveSearch(list)
 
   initBackToTop()
+  initReveal()
+
+  function initReveal() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (!('IntersectionObserver' in window)) return
+    var items = document.querySelectorAll('.category-list > li, .writing-list > li')
+    if (!items.length) return
+    document.documentElement.classList.add('js-motion')
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in')
+          io.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.15 })
+    Array.prototype.forEach.call(items, function (li, i) {
+      var isCategory = li.parentNode.classList.contains('category-list')
+      li.classList.add('reveal', isCategory ? 'pop' : 'slice')
+      li.style.setProperty('--d', (i % 6) * 90 + 'ms')
+      io.observe(li)
+    })
+  }
 
   function initStory(article) {
     var bar = document.createElement('div')
