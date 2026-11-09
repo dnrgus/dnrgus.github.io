@@ -105,6 +105,8 @@ img{display:block;max-width:100%}
 .js-motion .slice.reveal.in>a{animation:wipe .9s cubic-bezier(.2,.8,.2,1) var(--d,0ms) both}
 @keyframes wipe{to{clip-path:inset(0 0 0 0)}}
 .js-motion .reveal.in{opacity:1;transform:none}
-@media(max-width:900px){.category-list{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.category-list{grid-template-columns:1fr}}
+.category-list>li,.writing-list>li{min-width:0}
+.category-list a{min-width:0;max-width:100%}
+@media(max-width:900px){.category-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.category-list{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.hero h1 .w,.story-header h1,.hero-visual{animation:none;opacity:1;transform:none}.js-motion .reveal{opacity:1;transform:none;clip-path:none}}
