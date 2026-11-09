@@ -104,11 +104,9 @@ img{display:block;max-width:100%}
 .js-motion .slice.reveal>a{clip-path:inset(0 100% 0 0)}
 .js-motion .slice.reveal.in>a{animation:wipe .9s cubic-bezier(.2,.8,.2,1) var(--d,0ms) both}
 @keyframes wipe{to{clip-path:inset(0 0 0 0)}}
-@keyframes tocIn{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
-.toc li{animation:tocIn .7s var(--bounce) both;animation-delay:calc(var(--i,0) * 70ms + 200ms)}
-.toc a{display:block;transition:transform .5s var(--bounce),color .2s,border-color .2s,background .2s}
-.toc a:hover{transform:translateX(6px)}
-.toc a.is-current{color:var(--accent);border-left-color:var(--pop);background:var(--sky);border-radius:0 12px 12px 0;transform:translateX(10px) scale(1.03);font-weight:600}
+.toc a{display:block;transition:color .2s,border-color .2s,background .2s}
+.toc a.is-current{color:var(--accent);border-left-color:var(--accent);background:var(--wash);font-weight:600}
+@media(min-width:1200px){.story:has(>.toc){display:block;width:min(780px,100%)}.story:has(>.toc)>.toc{position:fixed;left:24px;top:50%;transform:translateY(-50%);grid-column:auto;grid-row:auto;width:176px;max-height:calc(100vh - 120px);overflow-x:hidden;overflow-y:auto;margin:0;padding:0;border-bottom:0}.story:has(>.toc)>.story-body{grid-column:auto;grid-row:auto}}
 @media(prefers-reduced-motion:reduce){.toc li{animation:none}.toc a{transition:none}}
 .to-top{width:64px;height:64px;white-space:nowrap;line-height:1.2;padding:0}
 @media(max-width:760px){.to-top{width:56px;height:56px}}
