@@ -76,6 +76,7 @@
       toc.appendChild(ol)
       var header = article.querySelector('.story-header')
       if (header && header.nextSibling) header.parentNode.insertBefore(toc, header.nextSibling)
+      initTocSpring(toc)
       if ('IntersectionObserver' in window) {
         var links = toc.querySelectorAll('a')
         var linkFor = {}
@@ -108,6 +109,41 @@
     }, { passive: true })
     updateProgress()
     if (reduce) bar.style.transition = 'none'
+  }
+
+  // The side table of contents lags behind scrolling and springs back up/down.
+  function initTocSpring(toc) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    var y = 0
+    var v = 0
+    var last = window.scrollY
+    var running = false
+    var K = 0.14
+    var C = 0.16
+    function wide() { return window.matchMedia('(min-width: 1200px)').matches }
+    function frame() {
+      v += -K * y - C * v
+      y = Math.max(-40, Math.min(40, y + v))
+      if (wide()) toc.style.transform = 'translateY(calc(-50% + ' + y.toFixed(2) + 'px))'
+      if (Math.abs(y) > 0.05 || Math.abs(v) > 0.05) {
+        window.requestAnimationFrame(frame)
+      } else {
+        running = false
+        y = 0
+        v = 0
+        toc.style.transform = ''
+      }
+    }
+    window.addEventListener('scroll', function () {
+      if (!wide()) return
+      var d = window.scrollY - last
+      last = window.scrollY
+      v += Math.max(-30, Math.min(30, d)) * 0.25
+      if (!running) {
+        running = true
+        window.requestAnimationFrame(frame)
+      }
+    }, { passive: true })
   }
 
   function initArchiveSearch(list) {
