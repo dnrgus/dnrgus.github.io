@@ -1,0 +1,3 @@
+# Keep the developer-only check script out of the published site.
+exclude:
+  - scripts

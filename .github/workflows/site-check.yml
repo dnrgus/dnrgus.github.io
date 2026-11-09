@@ -1,0 +1,26 @@
+name: site check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check frame, metadata, links, and scripts
+        run: node scripts/check-site.mjs
+
+  jekyll-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build with the same Jekyll setup GitHub Pages uses
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
