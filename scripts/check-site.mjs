@@ -10,7 +10,10 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const errors = []
 const fail = (file, msg) => errors.push(`${file}: ${msg}`)
 const rel = (p) => path.relative(root, p).split(path.sep).join('/')
-const read = (p) => fs.readFileSync(p, 'utf8')
+// Text is compared with LF line endings so a Windows autocrlf checkout hashes the same as Linux CI.
+const TEXT_FILE = /\.(html|css|js|mjs|svg|yml|json|md)$/
+const normalize = (buf) => buf.toString('utf8').replace(/\r\n/g, '\n')
+const read = (p) => normalize(fs.readFileSync(p))
 
 const EXPECTED_CATEGORIES = [
   'development',
@@ -180,7 +183,11 @@ const FRAME_FILES = [
   "_config.yml",
 ]
 const manifestPath = path.join(root, "scripts", "frame-manifest.json")
-const digest = (rel) => crypto.createHash("sha256").update(fs.readFileSync(path.join(root, rel))).digest("hex")
+const digest = (f) => {
+  const raw = fs.readFileSync(path.join(root, f))
+  const bytes = TEXT_FILE.test(f) ? Buffer.from(normalize(raw), 'utf8') : raw
+  return crypto.createHash("sha256").update(bytes).digest("hex")
+}
 const current = Object.fromEntries(FRAME_FILES.map((f) => [f, digest(f)]))
 
 if (process.argv.includes("--update")) {
