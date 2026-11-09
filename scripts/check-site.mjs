@@ -89,12 +89,18 @@ function checkShell(file, html) {
   }
 }
 
+// --- no emoji anywhere in authored pages (house rule from the Knights Frontier notice)
+const EMOJI = /\p{Extended_Pictographic}/u
+for (const abs of [path.join(root, "index.html"), ...walk(path.join(root, "categories")), ...walk(path.join(root, "posts"))]) {
+  if (EMOJI.test(read(abs))) fail(rel(abs), "contains an emoji")
+}
+
 // --- index.html: hero image and six categories in the agreed order
 const indexPath = path.join(root, 'index.html')
 const indexHtml = read(indexPath)
 if (!indexHtml.includes('assets/brachio-line.webp')) fail('index.html', 'hero dinosaur image missing')
 if (!/<img[^>]+alt="[^"]+"/.test(indexHtml)) fail('index.html', 'hero image has no alt text')
-const catHrefs = [...indexHtml.matchAll(/href="categories\/([\w-]+)\.html"/g)].map((m) => m[1])
+const catHrefs = [...indexHtml.matchAll(/href="categories\/([\w-]+)\/"/g)].map((m) => m[1])
 const uniqueCats = [...new Set(catHrefs)]
 if (JSON.stringify(uniqueCats) !== JSON.stringify(EXPECTED_CATEGORIES)) {
   fail('index.html', `category list is [${uniqueCats.join(', ')}], expected the six agreed categories in order`)
@@ -104,9 +110,9 @@ checkLocalLinks(indexPath, indexHtml)
 
 // --- category pages: one per category, with matching key
 for (const key of EXPECTED_CATEGORIES) {
-  const p = path.join(root, 'categories', `${key}.html`)
+  const p = path.join(root, 'categories', key, 'index.html')
   if (!fs.existsSync(p)) {
-    fail(`categories/${key}.html`, 'category page missing')
+    fail(`categories/${key}/index.html`, 'category page missing')
     continue
   }
   const html = read(p)
@@ -174,7 +180,7 @@ if (!indexHtml.includes('<script src="assets/site.js" defer>')) fail("index.html
 // Posts are not in the manifest, so writing new posts never trips this check.
 const FRAME_FILES = [
   "index.html",
-  ...EXPECTED_CATEGORIES.map((k) => `categories/${k}.html`),
+  ...EXPECTED_CATEGORIES.map((k) => `categories/${k}/index.html`),
   "assets/site.css",
   "assets/site.js",
   "assets/favicon.svg",
