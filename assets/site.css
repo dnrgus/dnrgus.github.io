@@ -99,10 +99,12 @@ img{display:block;max-width:100%}
 .toc a{border-radius:0 10px 10px 0}
 .read-progress{height:6px;border-radius:0 6px 6px 0;background:linear-gradient(90deg,var(--mint),var(--pop))}
 .story-header h1{animation:pop .9s var(--bounce) both;opacity:0;transform:translateY(16px) scale(.96)}
-.js-motion .reveal{opacity:0;transition:opacity .5s ease,transform .8s var(--bounce),clip-path .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0ms)}
+.js-motion .reveal{opacity:0;transition:opacity .5s ease,transform .8s var(--bounce);transition-delay:var(--d,0ms)}
 .js-motion .pop.reveal{transform:translateY(46px) scale(.82)}
-.js-motion .slice.reveal{clip-path:inset(0 100% 0 0)}
-.js-motion .reveal.in{opacity:1;transform:none;clip-path:inset(0 0 0 0)}
+.js-motion .slice.reveal>a{clip-path:inset(0 100% 0 0)}
+.js-motion .slice.reveal.in>a{animation:wipe .9s cubic-bezier(.2,.8,.2,1) var(--d,0ms) both}
+@keyframes wipe{to{clip-path:inset(0 0 0 0)}}
+.js-motion .reveal.in{opacity:1;transform:none}
 @media(max-width:900px){.category-list{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.category-list{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.hero h1 .w,.story-header h1,.hero-visual{animation:none;opacity:1;transform:none}.js-motion .reveal{opacity:1;transform:none;clip-path:none}}
