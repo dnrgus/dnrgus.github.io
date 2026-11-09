@@ -1,0 +1,16 @@
+---
+item_type: post
+permalink: /posts/fuzzing-101-log/
+title: "Fuzzing-101 실습 기록: Xpdf와 libexif"
+post_category: bug-bounty
+post_categories:
+  - bug-bounty
+category_label: Bug Bounty
+post_date: 2026-11-09 10:35:00 +0900
+---
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="AFL++로 Xpdf 3.02와 libexif 0.6.14를 퍼징해 CVE-2019-13288, CVE-2009-3895, CVE-2012-2836을 재현한 실습 기록."><meta name="theme-color" content="#f7f7f3"><title>Fuzzing-101 실습 기록: Xpdf와 libexif | dnrgus의 탐구 노트</title><link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg"><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="../../">dnrgus <span>/ notes</span></a><nav class="site-nav" aria-label="주 메뉴"><a href="../../#categories">카테고리</a><a href="../../#writing">최근 글</a><a href="https://github.com/dnrgus" target="_blank" rel="noopener noreferrer">GitHub</a></nav></div></header>
+<main id="main" class="story-page wrap"><a class="back-link" href="../../categories/bug-bounty/">Bug Bounty 목록</a><article class="story"><header class="story-header"><p class="story-meta">Bug Bounty <span aria-hidden="true">/</span> 2026.11.09</p><h1>Fuzzing-101 실습 기록: Xpdf와 libexif</h1><p class="story-lead">GitHub Security Lab의 Fuzzing-101 실습 두 개를 따라 했다. 퍼저가 크래시를 찾는 과정과 그 크래시를 알려진 CVE와 연결하는 과정을 기록했다.</p></header><div class="story-body"><section class="story-section"><h2>Exercise 1: Xpdf 3.02와 무한 재귀</h2><p>첫 번째 실습 대상은 PDF 뷰어인 Xpdf 3.02였다. 목표는 CVE-2019-13288이었다. 조작된 파일이 무한 재귀를 일으키고, 그 결과 스택 메모리가 고갈되어 프로그램이 죽는 DoS 취약점이다. 실습 환경은 Ubuntu 20.04.2 LTS였다.</p><p>AFL++를 쓰려면 타겟을 계측 빌드해야 했다. 이 과정이 낯설었는데, 퍼저가 어떤 코드 경로를 지났는지 알아야 새 입력을 우선 변형할 수 있다는 것을 이해하고 나서 편해졌다. 크래시가 나오면 GDB로 열어서 스택이 어떻게 쌓이는지 보았다.</p></section><section class="story-section"><h2>Exercise 2: libexif와 EXIF 데이터</h2><p>두 번째 실습은 EXIF 데이터를 처리하는 libexif 0.6.14였다. libexif는 라이브러리이므로 그것을 호출하는 별도의 프로그램을 퍼징 대상으로 삼아야 했다. 목표 취약점은 CVE-2009-3895와 CVE-2012-2836이었다.</p><p>CVE-2009-3895는 exif_entry_fix() 함수에서 생기는 힙 기반 버퍼 오버플로다. CVE-2012-2836은 범위를 벗어난 메모리 읽기다. 퍼저가 두 가지 크래시를 찾았을 때 각각 어떤 함수에서 멈췄는지 확인하며 CVE와 연결했다. 마지막에는 수정 후 같은 입력으로 크래시가 사라지는지도 확인했다.</p></section><section class="story-section"><h2>실습하고 남은 생각</h2><p>퍼징은 사람이 생각하지 못한 입력을 기계가 대신 만들어 주는 방식이라서, 결과를 해석하는 쪽에 시간이 더 든다는 것을 알게 됐다. 크래시를 찾는 것보다 그 크래시가 보안상 어떤 의미인지 설명하는 것이 더 어려웠다.</p></section></div></article><nav class="story-back" aria-label="글 목록"><a href="../../categories/bug-bounty/">Bug Bounty의 다른 글</a><a href="../../">처음으로</a></nav></main>
+<footer class="site-footer"><div class="wrap footer-inner"><strong>dnrgus의 탐구 노트</strong><span>기록과 결과물의 연결</span></div></footer><script src="../../assets/site.js" defer></script></body></html>

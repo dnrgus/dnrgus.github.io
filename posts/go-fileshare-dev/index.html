@@ -1,0 +1,16 @@
+---
+item_type: post
+permalink: /posts/go-fileshare-dev/
+title: "Go로 만든 파일 공유 서비스 개발기"
+post_category: development
+post_categories:
+  - development
+category_label: 개발
+post_date: 2026-11-09 10:00:00 +0900
+---
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Go 표준 라이브러리만으로 만든 임시 파일 공유 서비스를 만들며 업로드 검증과 만료, 삭제 키를 어떻게 설계했는지 적은 글."><meta name="theme-color" content="#f7f7f3"><title>Go로 만든 파일 공유 서비스 개발기 | dnrgus의 탐구 노트</title><link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg"><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="../../">dnrgus <span>/ notes</span></a><nav class="site-nav" aria-label="주 메뉴"><a href="../../#categories">카테고리</a><a href="../../#writing">최근 글</a><a href="https://github.com/dnrgus" target="_blank" rel="noopener noreferrer">GitHub</a></nav></div></header>
+<main id="main" class="story-page wrap"><a class="back-link" href="../../categories/development/">개발 목록</a><article class="story"><header class="story-header"><p class="story-meta">개발 <span aria-hidden="true">/</span> 2026.11.09</p><h1>Go로 만든 파일 공유 서비스 개발기</h1><p class="story-lead">파일을 올리면 공유 링크가 생기는 서비스를 Go로 만들었다. 개발의 중심은 기능 자체보다 올라온 파일을 어떻게 안전하게 받느냐에 있었다.</p></header><div class="story-body"><section class="story-section"><h2>무엇을 만들었나</h2><p>처음 목표는 단순했다. 파일을 올리면 누구든 받을 수 있는 링크를 만드는 것이었다. 웹 화면에서 드래그 앤 드롭으로 올리는 방식도 되고, curl -F나 curl -T로 올리는 방식도 되게 했다. 올라간 파일은 /f/랜덤ID/파일명 형식의 링크로 내려받는다. 기본 만료는 24시간이고, 다운로드 쪽은 curl -OJ와 Range 요청을 통한 이어받기를 지원하도록 했다.</p><p>삭제는 업로드할 때 받은 삭제 키가 있어야만 되도록 했다. 링크만 알고 있는 사람이 파일을 지울 수 없게 하려는 선택이었다.</p></section><section class="story-section"><h2>업로드를 가장 많이 고민했던 이유</h2><p>파일 업로드는 낯선 사람이 서버에 데이터를 놓도록 허락하는 기능이다. 설계를 잘못하면 서버를 장악당하거나 다른 사용자를 공격하는 발판이 된다. OWASP가 다루는 제한 없는 파일 업로드 취약점이 바로 이 지점이다. 그래서 이 프로젝트에서는 기능을 붙이는 것보다 공격자가 무엇을 올릴 수 있는지를 먼저 막았다.</p><p>허용 확장자는 텍스트, 문서, 이미지, zip 같은 일부로 좁혔다. .txt, .md, .csv, .json, .log, .pdf, 이미지 몇 종류, .zip, .docx, .xlsx, .pptx까지만 받는다. 기본 최대 크기는 20MB다. 확장자만 보면 부족하다고 생각해서 MIME 타입 검증과 경로 검증도 함께 넣었다. 파일 이름에 경로 문자가 섞여 있으면 저장하지 않는다.</p></section><section class="story-section"><h2>구현 방식</h2><p>런타임 의존성 없이 Go 1.22 표준 라이브러리만 쓰기로 했다. 외부 패키지가 늘어나면 보안 점검 범위도 같이 늘어나기 때문이다. 웹 화면의 HTML, CSS, JavaScript는 go:embed로 바이너리 안에 넣었다. 배포 설정은 Docker와 Caddy로 잡았다.</p><p>이 서비스는 로그인 없이 쓰는 임시 전달 도구다. 장기 보관이나 협업용 저장소가 아니라는 점을 README에 분명히 적었다. 기능을 조금 더 붙이고 싶은 유혹이 있었지만, 이 범위를 넘기면 보안 검증을 다시 해야 한다고 판단해서 참았다.</p></section><section class="story-section"><h2>돌아보며</h2><p>만들고 나서 보니 가장 오래 고민한 부분은 만료와 삭제였다. 만료는 파일을 언제 지울지 정하는 문제이고, 삭제는 누가 지울 수 있는지 정하는 문제였다. 두 가지가 맞물려야 임시 파일이 임시로 남는다. 이 과정을 글로 옮기면서 업로드 기능 하나에도 여러 검증 층이 필요하다는 것을 확인했다.</p></section></div></article><nav class="story-back" aria-label="글 목록"><a href="../../categories/development/">개발의 다른 글</a><a href="../../">처음으로</a></nav></main>
+<footer class="site-footer"><div class="wrap footer-inner"><strong>dnrgus의 탐구 노트</strong><span>기록과 결과물의 연결</span></div></footer><script src="../../assets/site.js" defer></script></body></html>

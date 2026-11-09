@@ -1,0 +1,16 @@
+---
+item_type: post
+permalink: /posts/arm-pac-analysis/
+title: "ARM PAC(Pointer Authentication) 보호기법 분석"
+post_category: papers-conferences
+post_categories:
+  - papers-conferences
+category_label: 논문/컨퍼런스
+post_date: 2026-11-09 10:50:00 +0900
+---
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="ARMv8.3-A의 Pointer Authentication이 포인터의 상위 비트에 서명을 넣어 변조를 탐지하는 원리와 한계를 정리한 분석."><meta name="theme-color" content="#f7f7f3"><title>ARM PAC(Pointer Authentication) 보호기법 분석 | dnrgus의 탐구 노트</title><link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg"><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="../../">dnrgus <span>/ notes</span></a><nav class="site-nav" aria-label="주 메뉴"><a href="../../#categories">카테고리</a><a href="../../#writing">최근 글</a><a href="https://github.com/dnrgus" target="_blank" rel="noopener noreferrer">GitHub</a></nav></div></header>
+<main id="main" class="story-page wrap"><a class="back-link" href="../../categories/papers-conferences/">논문/컨퍼런스 목록</a><article class="story"><header class="story-header"><p class="story-meta">논문/컨퍼런스 <span aria-hidden="true">/</span> 2026.11.09</p><h1>ARM PAC(Pointer Authentication) 보호기법 분석</h1><p class="story-lead">ARM의 Pointer Authentication 기능을 따라가며 어떤 위협을 막고 어떤 위협은 막지 못하는지 정리했다. 기능 설명보다 위협 모델을 먼저 적었다.</p></header><div class="story-body"><section class="story-section"><h2>배경과 도입 이유</h2><p>PAC를 처음 보면 스택 카나리나 ASLR과 무엇이 다른지 헷갈린다. 앞선 방어 기법들은 각각 우회 방법이 알려져 있어서, 포인터 자체가 바뀌었는지를 하드웨어로 검증하는 방식이 도입되었다. 그 시작이 ARMv8.3-A의 확장 기능이다.</p><p>메모리 손상 취약점으로 반환 주소나 함수 포인터를 덮어쓰면 ROP와 JOP 같은 제어 흐름 탈취가 가능하다. PAC는 이 포인터들을 쓸 때 서명이 맞는지 확인해서 덮어쓰기를 탐지하도록 만든다.</p></section><section class="story-section"><h2>동작 원리</h2><p>64비트 포인터 중 실제 주소로 쓰이지 않는 상위 비트에 PAC를 넣는다. PAC는 포인터 값, 64비트 모디파이어, 128비트 키를 입력으로 계산한다. 암호 알고리즘은 QARMA 계열이 대표적이지만 구현에 따라 다른 알고리즘을 쓸 수도 있다.</p><p>사용하기 직전에 같은 계산을 다시 해서 비교한다. 맞으면 주소로 쓰고, 틀리면 실패 상태가 된다. 일부 명령은 HINT 공간에 있어서 PAC를 지원하지 않는 CPU에서는 NOP처럼 동작한다. 호환성을 위해 그렇게 설계되었다는 설명이 인상 깊었다.</p></section><section class="story-section"><h2>위협 모델과 한계</h2><p>글에서 가장 중요하다고 느낀 부분은 위협 모델이었다. 공격자가 임의의 메모리 읽기와 쓰기를 가졌다고 가정한다. 하지만 키는 시스템 레지스터에 있어서 일반 메모리 읽기로는 얻을 수 없다고 전제한다.</p><p>PAC는 무결성을 지켜 줄 뿐이다. 코드 주입이나 데이터만 바꾸는 공격을 막지는 못한다. 이미 서명된 유효한 포인터를 다른 위치에서 바꿔 쓰는 치환 공격도 설계상 완전히 막기 어렵고, 모디파이어를 어떻게 잡느냐로 완화한다고 한다. 이 대목을 읽으면서 보호 기법이 만능이 아니라는 것을 다시 확인했다.</p></section></div></article><nav class="story-back" aria-label="글 목록"><a href="../../categories/papers-conferences/">논문/컨퍼런스의 다른 글</a><a href="../../">처음으로</a></nav></main>
+<footer class="site-footer"><div class="wrap footer-inner"><strong>dnrgus의 탐구 노트</strong><span>기록과 결과물의 연결</span></div></footer><script src="../../assets/site.js" defer></script></body></html>

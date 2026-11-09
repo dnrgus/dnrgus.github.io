@@ -1,0 +1,16 @@
+---
+item_type: post
+permalink: /posts/git-learning-log/
+title: "Git 배우기 기록"
+post_category: technical-writing
+post_categories:
+  - technical-writing
+category_label: 블로그/기술문서
+post_date: 2026-11-09 10:55:00 +0900
+---
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Git 실습 문제를 따라가며 정리한 기록. rebase, cherry-pick, 상대 참조, 원격 저장소 흐름을 다뤘다."><meta name="theme-color" content="#f7f7f3"><title>Git 배우기 기록 | dnrgus의 탐구 노트</title><link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg"><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="../../">dnrgus <span>/ notes</span></a><nav class="site-nav" aria-label="주 메뉴"><a href="../../#categories">카테고리</a><a href="../../#writing">최근 글</a><a href="https://github.com/dnrgus" target="_blank" rel="noopener noreferrer">GitHub</a></nav></div></header>
+<main id="main" class="story-page wrap"><a class="back-link" href="../../categories/technical-writing/">블로그/기술문서 목록</a><article class="story"><header class="story-header"><p class="story-meta">블로그/기술문서 <span aria-hidden="true">/</span> 2026.11.09</p><h1>Git 배우기 기록</h1><p class="story-lead">Git 실습 문제를 한 단계씩 따라가며 정리했다. 명령을 외우기보다 커밋 그래프가 어떻게 바뀌는지 그려 보는 쪽에 시간을 썼다.</p></header><div class="story-body"><section class="story-section"><h2>기본과 상대 참조</h2><p>가장 처음에는 커밋이 무엇인지부터 잡았다. 커밋은 저장소에 있는 모든 파일의 스냅샷을 기록하는 것인데, Git은 가볍게 유지하려고 이전 버전과 다음 버전만 저장한다고 한다. 브랜치는 그 커밋을 가리키는 이름표이고, HEAD는 지금 체크아웃된 커밋을 가리킨다.</p><p>상대 참조를 배우면서 HEAD~와 ^ 표기가 헷갈렸다. 병합 커밋에서 어느 부모를 따라갈지 고르는 것이 ^ 숫자라는 점을 이해하고 나서는 훨씬 편해졌다.</p></section><section class="story-section"><h2>rebase와 cherry-pick</h2><p>고급 문제에서는 9천 번이 넘는 리베이스 문제가 나왔다. 브랜치 여러 개를 main 위로 옮기는 연습이었다. 중간에 브랜치 스파게티라는 문제가 나왔는데, 여러 브랜치에 흩어진 커밋을 cherry-pick으로 한 줄에 모으는 것이 목표였다.</p><p>cherry-pick은 현재 위치 아래의 특정 커밋들을 복사해 오는 명령이다. interactive rebase는 -i 옵션으로 커밋 순서를 바꾸거나 합치고 수정하는 데 쓴다. 종합 문제에서는 rebase -i로 순서를 맞추고, commit --amend로 내용을 고친 다음 다시 순서를 맞췄다.</p></section><section class="story-section"><h2>원격 저장소</h2><p>원격 저장소는 백업이면서 다른 사람과 작업을 나누는 자리라는 설명으로 시작했다. push와 pull의 흐름을 익히고, origin 같은 원격 브랜치 이름이 로컬 브랜치와 어떻게 다른지 보았다.</p><p>마지막 문제에서는 feature 브랜치를 원격 main 위로 rebase하고 push하는 흐름을 연습했다. 왜 merge 대신 rebase를 쓰는지 질문이 나왔는데, 원격 기록을 깔끔하게 한 줄로 유지하려는 목적이라는 설명을 읽고 이해했다.</p></section></div></article><nav class="story-back" aria-label="글 목록"><a href="../../categories/technical-writing/">블로그/기술문서의 다른 글</a><a href="../../">처음으로</a></nav></main>
+<footer class="site-footer"><div class="wrap footer-inner"><strong>dnrgus의 탐구 노트</strong><span>기록과 결과물의 연결</span></div></footer><script src="../../assets/site.js" defer></script></body></html>
