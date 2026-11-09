@@ -117,3 +117,13 @@ img{display:block;max-width:100%}
 @media(max-width:900px){.category-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.category-list{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.hero h1 .w,.story-header h1,.hero-visual{animation:none;opacity:1;transform:none}.js-motion .reveal{opacity:1;transform:none;clip-path:none}}
+
+/* Tables and code blocks inside story sections (used by paper notes). */
+.story-section table{width:100%;margin:16px 0 0;border-collapse:collapse;font-size:14px;line-height:1.7;color:#344138}
+.story-section thead th{text-align:left;font-size:12px;letter-spacing:.02em;color:var(--accent);border-bottom:1px solid var(--ink);padding:8px 10px;vertical-align:bottom}
+.story-section tbody td{border-bottom:1px solid var(--line);padding:8px 10px;vertical-align:top}
+.story-section tbody tr:hover{background:var(--wash)}
+.story-section pre{margin:16px 0 0;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--paper);overflow-x:auto;font-size:13px;line-height:1.75}
+.story-section pre code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#2b352d;white-space:pre}
+.story-section p code,.story-section li code,.story-section td code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;padding:1px 5px;border-radius:6px;background:var(--wash);color:#2b352d}
+@media(max-width:760px){.story-section table{font-size:13px}.story-section thead th,.story-section tbody td{padding:7px 7px}}
