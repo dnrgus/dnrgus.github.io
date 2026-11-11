@@ -120,7 +120,7 @@
     var running = false
     var K = 0.035
     var C = 0.2
-    function wide() { return window.matchMedia('(min-width: 1200px)').matches }
+    function wide() { return window.matchMedia('(min-width: 1280px)').matches }
     // Place the table of contents, but never let its top edge rise above the article title.
     function place(offset) {
       var h = toc.offsetHeight
