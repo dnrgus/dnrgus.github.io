@@ -159,6 +159,8 @@
         window.requestAnimationFrame(frame)
       }
     }, { passive: true })
+    if (wide()) place(0)
+    window.addEventListener("resize", function () { if (wide()) place(0) })
   }
 
   function initArchiveSearch(list) {
