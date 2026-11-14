@@ -123,6 +123,11 @@
     function wide() { return window.matchMedia('(min-width: 1280px)').matches }
     // Place the table of contents, but never let its top edge rise above the article title.
     function place(offset) {
+      if (!wide()) { toc.style.display = ""; toc.style.transform = ""; return }
+      var body = document.querySelector(".story-body")
+      // Hide the side table of contents when there is no room for it beside the article.
+      if (body && body.getBoundingClientRect().left < 240) { toc.style.display = "none"; return }
+      toc.style.display = ""
       var h = toc.offsetHeight
       var base = window.innerHeight / 2 - h / 2
       var title = document.querySelector('.story-header h1')
@@ -160,7 +165,7 @@
       }
     }, { passive: true })
     if (wide()) place(0)
-    window.addEventListener("resize", function () { if (wide()) place(0) })
+    window.addEventListener("resize", function () { place(0) })
   }
 
   function initArchiveSearch(list) {
